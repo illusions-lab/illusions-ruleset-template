@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build (minified for distribution)
+        run: npm run build:min
+
+      - name: Package drop-in folder
+        run: |
+          RID=$(node -p "require('./manifest.json').id")
+          OUT="dist-package/$RID"
+          mkdir -p "$OUT"
+          cp dist/index.js "$OUT/index.js"
+          cp manifest.json "$OUT/manifest.json"
+          (cd dist-package && zip -r "../${RID}-${GITHUB_REF_NAME}.zip" "$RID")
+          echo "RID=$RID" >> "$GITHUB_ENV"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/index.js
+            manifest.json
+            ${{ env.RID }}-${{ github.ref_name }}.zip
+          generate_release_notes: true

@@ -1,0 +1,34 @@
+{
+  "$comment": "Ruleset meta — read WITHOUT executing code (UI listing, engineApi check, quarantine). Keep in sync with src/index.ts. Edit the placeholders below.",
+  "id": "com.example.my-ruleset",
+  "name": "My Ruleset",
+  "nameJa": "わたしの校正規約",
+  "version": "0.1.0",
+  "engineApi": 1,
+  "license": "MIT",
+  "guidelines": [
+    {
+      "id": "my-guideline",
+      "nameJa": "わたしの規約",
+      "publisherJa": "—",
+      "year": null,
+      "license": "Public",
+      "descriptionJa": "このルールセットが提供するガイドライン"
+    }
+  ],
+  "rules": [
+    {
+      "ruleId": "sample-fw-exclaim",
+      "nameJa": "全角『！』の検出",
+      "descriptionJa": "和文中の全角感嘆符（！）を半角（!）に直します。",
+      "guidelineId": "my-guideline",
+      "level": "L1",
+      "defaultConfig": { "enabled": true, "severity": "info" },
+      "docs": {
+        "positiveExample": "すごい!",
+        "negativeExample": "すごい！",
+        "sourceReference": "サンプル規約 §1"
+      }
+    }
+  ]
+}

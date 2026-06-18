@@ -1,0 +1,24 @@
+{
+  "name": "illusions-ruleset-template",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Template for developing an illusions 校正(lint) ruleset (1 repo = 1 ruleset).",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "tsup",
+    "build:min": "tsup --minify",
+    "check": "npm run typecheck && npm run test && npm run build"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}
