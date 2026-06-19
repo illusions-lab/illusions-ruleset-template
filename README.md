@@ -103,6 +103,15 @@ illusions マーケットプレイスがこの topic を持つリポジトリを
 > 公開の前提: `manifest.json` の `id` / `nameJa` / `version` / `engineApi` が正しく、
 > リリース（`v*` タグ）で `dist/index.js` と `manifest.json` が添付されていること。
 
+## ライセンス・商用利用・審査
+
+- ルールセットは**オープンソースでもクローズドソースでも構いません**。**商用利用（ruleset の販売を含む）も可能**です。
+- オープンソースの場合、**好きな OSS ライセンス**（MIT / Apache-2.0 / GPL など）を選べます。
+- **クローズドソースのプラグインを marketplace に上架する場合は、illusions team によるソースコード審査の通過が必須**です。
+  これは悪意あるコードを防ぐための措置です。
+- 提出いただいたソースコードは**審査の目的のみに使用**し、それ以外の用途には使用しません。
+- 詳細は **illusions TERM** を参照してください。
+
 ## バージョン互換
 
 `manifest.json` の `engineApi` は illusions 側の `ENGINE_API_VERSION`（現在 **1**）と一致させること。
