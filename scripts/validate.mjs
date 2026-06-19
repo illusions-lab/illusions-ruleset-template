@@ -5,8 +5,10 @@
  * Verifies:
  *  - manifest.json is present and has the required fields
  *  - engineApi matches the supported version
+ *  - maintainerEmail is present and looks like an email
  *  - every ruleId is unique
  *  - every ruleId starts with rulesetPrefix (when declared)
+ *  - every rule declares applicableModes as an array of known mode ids
  *  - every rule has non-empty docs (positive/negative/source)
  *  - every rule has a docs/rules/<ruleId>.md file
  *
@@ -18,6 +20,8 @@ import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SUPPORTED_ENGINE_API = 1;
+const CORRECTION_MODE_IDS = ["novel", "official", "blog", "academic", "sns"];
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const errors = [];
 const warnings = [];
@@ -37,12 +41,25 @@ try {
   process.exit(1);
 }
 
-for (const field of ["id", "name", "nameJa", "version", "engineApi", "license", "rules"]) {
+for (const field of [
+  "id",
+  "name",
+  "nameJa",
+  "version",
+  "engineApi",
+  "license",
+  "maintainerEmail",
+  "rules",
+]) {
   if (manifest[field] === undefined) fail(`manifest.${field} がありません`);
 }
 
 if (manifest.engineApi !== SUPPORTED_ENGINE_API) {
   fail(`engineApi は ${SUPPORTED_ENGINE_API} である必要があります（現在: ${manifest.engineApi}）`);
+}
+
+if (manifest.maintainerEmail !== undefined && !EMAIL_RE.test(String(manifest.maintainerEmail))) {
+  fail(`maintainerEmail がメールアドレスの形式ではありません: ${manifest.maintainerEmail}`);
 }
 
 if (manifest.rulesetPrefix !== undefined && typeof manifest.rulesetPrefix !== "string") {
@@ -68,6 +85,16 @@ for (const rule of rules) {
 
   if (!["L1", "L2", "L3"].includes(rule.level)) fail(`ruleId「${id}」の level が不正です`);
   if (!rule.defaultConfig) fail(`ruleId「${id}」に defaultConfig がありません`);
+
+  if (!Array.isArray(rule.applicableModes)) {
+    fail(`ruleId「${id}」に applicableModes（配列）がありません`);
+  } else {
+    for (const mode of rule.applicableModes) {
+      if (!CORRECTION_MODE_IDS.includes(mode)) {
+        fail(`ruleId「${id}」の applicableModes に不明なモード「${mode}」があります`);
+      }
+    }
+  }
 
   const docs = rule.docs ?? {};
   for (const k of ["positiveExample", "negativeExample", "sourceReference"]) {

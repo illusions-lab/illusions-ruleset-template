@@ -39,6 +39,9 @@ npm run check     # typecheck + test + build
 
 - ルールセットは `RulesetModule` を **default export** する（`src/index.ts`）。
 - `manifest` は**純データ**。UI 一覧・`engineApi` 整合・隔離判定にコード非実行で使われる。
+- `manifest.maintainerEmail`（**必須**）= メンテナ連絡先。marketplace 収録・通知の送信先。
+- 各ルールの `applicableModes`（**必須**）= 自動有効化される校正モードのリスト
+  （`novel`/`official`/`blog`/`academic`/`sns`）。空配列は手動トグルのみ。詳細は [docs/README.md](./docs/README.md)。
 - `createRules(ctx)` は `ctx` から基底クラスと道具を受け取る:
   - 基底: `ctx.bases.AbstractL1Rule` 等を `extends`。
   - 道具: `ctx.toolkit.regexReplace` / `nfkc`（濁点合成）/ `detectUnits`（単位重複除去）など。

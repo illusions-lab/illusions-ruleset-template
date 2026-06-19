@@ -98,6 +98,12 @@ declare module "illusions-lint-sdk" {
     | "corrupt"
     | "unknown";
 
+  /** Correction mode (校正モード) identifier. */
+  export type CorrectionModeId = "novel" | "official" | "blog" | "academic" | "sns";
+
+  /** All correction modes a rule may opt into via applicableModes. */
+  export const CORRECTION_MODE_IDS: readonly CorrectionModeId[];
+
   // ---- Base classes (declared abstract; provided at runtime via ctx.bases) ----
   export abstract class AbstractLintRule implements LintRule {
     readonly id: string;
@@ -178,6 +184,11 @@ declare module "illusions-lint-sdk" {
     level: RuleLevel;
     defaultConfig: LintRuleConfig;
     supportsSkipDialogue?: boolean;
+    /**
+     * Correction modes this rule auto-enables in. Switching to a listed mode
+     * turns the rule on automatically. Empty array = manual toggle only.
+     */
+    applicableModes: CorrectionModeId[];
     docs: RulesetRuleDocs;
     requires?: RulesetRequirement[];
   }
@@ -189,6 +200,8 @@ declare module "illusions-lint-sdk" {
     version: string;
     engineApi: number;
     license: string;
+    /** Maintainer contact email. REQUIRED. Used for marketplace notifications. */
+    maintainerEmail: string;
     /** Shared naming prefix for every ruleId (collision avoidance). */
     rulesetPrefix?: string;
     guidelines: RulesetGuidelineMeta[];
