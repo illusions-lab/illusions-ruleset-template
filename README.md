@@ -87,9 +87,9 @@ npm version patch && git push --follow-tags
 
 ## マーケットプレイスへの公開
 
-GitHub のリポジトリに **`illusions-ruleset`** という topic（トピック）を追加してください。
-illusions マーケットプレイスがこの topic を持つリポジトリを**自動的に収集し、マーケットプレイスへ
-自動公開**します。
+GitHub のリポジトリに **`illusions-ruleset`** という topic（トピック）を追加するだけです。これが**最も簡単な
+発布方法**です。topic を付けると、あなたのルールセットは illusions マーケットプレイスに**自動的に収集され、
+ウイルススキャンを通過したあと自動的に上市**されます。
 
 設定方法（どちらでも可）:
 
@@ -102,6 +102,9 @@ illusions マーケットプレイスがこの topic を持つリポジトリを
 
 > 公開の前提: `manifest.json` の `id` / `nameJa` / `version` / `engineApi` が正しく、
 > リリース（`v*` タグ）で `dist/index.js` と `manifest.json` が添付されていること。
+>
+> クローズドソースのルールセットは topic だけでは上市できません。別途 illusions team による
+> ソースコード審査が必要です（下記「ライセンス・商用利用・審査」を参照）。
 
 ## ライセンス・商用利用・審査
 
