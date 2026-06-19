@@ -85,6 +85,24 @@ npm test
 npm version patch && git push --follow-tags
 ```
 
+## マーケットプレイスへの公開
+
+GitHub のリポジトリに **`illusions-ruleset`** という topic（トピック）を追加してください。
+illusions マーケットプレイスがこの topic を持つリポジトリを**自動的に収集し、マーケットプレイスへ
+自動公開**します。
+
+設定方法（どちらでも可）:
+
+- GitHub のリポジトリページ右上「About」横の ⚙️ → **Topics** に `illusions-ruleset` を追加。
+- または CLI:
+
+  ```bash
+  gh repo edit --add-topic illusions-ruleset
+  ```
+
+> 公開の前提: `manifest.json` の `id` / `nameJa` / `version` / `engineApi` が正しく、
+> リリース（`v*` タグ）で `dist/index.js` と `manifest.json` が添付されていること。
+
 ## バージョン互換
 
 `manifest.json` の `engineApi` は illusions 側の `ENGINE_API_VERSION`（現在 **1**）と一致させること。
