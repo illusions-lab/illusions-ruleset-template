@@ -6,6 +6,7 @@
   "version": "0.1.0",
   "engineApi": 1,
   "license": "MIT",
+  "rulesetPrefix": "sample-",
   "guidelines": [
     {
       "id": "my-guideline",

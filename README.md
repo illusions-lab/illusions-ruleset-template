@@ -27,8 +27,8 @@ npm run check     # typecheck + test + build
 │   ├── index.ts                  # default export: RulesetModule
 │   └── rules/<ruleId>.ts         # 各ルールの実装
 ├── docs/
-│   ├── README.md                 # 校正目録の書き方
-│   └── <ruleId>.md               # ルールごとのドキュメント（テンプレ）
+│   ├── README.md                 # ドキュメントの書き方
+│   └── rules/<ruleId>.md         # ★1ルール=1ファイル。各ルールが何をするかを記述
 ├── test/
 │   ├── test-kit.ts               # ローカルテスト用の RulesetContext
 │   └── <ruleId>.test.ts          # ゴールデン（positive→0 / negative→≥1）
@@ -47,7 +47,7 @@ npm run check     # typecheck + test + build
   できない）。実体は必ず `ctx` 経由で受け取る。
 
 サンプル: `src/rules/sample-fw-exclaim.ts` と `src/index.ts` を参照。詳細な契約は illusions 本体の
-`docs/linting/ruleset-authoring.md` を参照。
+`docs/ruleset/authoring.md` を参照。
 
 ## 辞典に依存するルール
 
@@ -74,7 +74,7 @@ npm test
 
 - **フォルダ配布**: `dist/index.js` + `manifest.json` を `~/.illusions/rulesets/<id>/` に置く。
 - **単一ファイル配布 / クローズドソース**: `npm run build:min` で難読化したり、`.illruleset` コンテナ
-  （平文ヘッダ + ペイロード）にまとめる（illusions の `docs/linting/closed-source.md` 参照）。
+  （平文ヘッダ + ペイロード）にまとめる（illusions の `docs/ruleset/closed-source.md` 参照）。
 
 ## リリース
 

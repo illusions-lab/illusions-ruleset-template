@@ -189,6 +189,8 @@ declare module "illusions-lint-sdk" {
     version: string;
     engineApi: number;
     license: string;
+    /** Shared naming prefix for every ruleId (collision avoidance). */
+    rulesetPrefix?: string;
     guidelines: RulesetGuidelineMeta[];
     rules: RulesetRuleMeta[];
     requires?: RulesetRequirement[];

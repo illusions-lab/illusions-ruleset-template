@@ -14,7 +14,8 @@
     "test:watch": "vitest",
     "build": "tsup",
     "build:min": "tsup --minify",
-    "check": "npm run typecheck && npm run test && npm run build"
+    "validate": "node scripts/validate.mjs",
+    "check": "npm run validate && npm run typecheck && npm run test && npm run build"
   },
   "devDependencies": {
     "tsup": "^8.3.0",

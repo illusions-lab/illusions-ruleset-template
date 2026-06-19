@@ -1,17 +1,20 @@
-# 校正目録（ルール ドキュメント）
+# ドキュメント
 
-このフォルダには**ルールごとのドキュメント**を置く（`docs/<ruleId>.md`）。各ファイルは
-ルールの意図・出典・正負例・実装メモを記述する。`manifest.json` の `docs`（正例/負例/出典）と
-内容を一致させ、テスト(`test/<ruleId>.test.ts`)のゴールデンとも同期させること。
+| パス | 内容 |
+| --- | --- |
+| `docs/rules/<ruleId>.md` | **1ルール = 1ファイル**。そのルールが何をするか（意図・出典・正負例・実装メモ）を記述する 校正目録。 |
 
-## 書き方
+## ルールを追加する手順
 
-1. ルールを `src/rules/<ruleId>.ts` に実装し、`src/index.ts` の `createRules` から返す。
-2. `manifest.json` の `rules[]` に同じ `ruleId` のメタ（`docs` 正負例・出典含む）を追加する。
-3. `docs/<ruleId>.md` をこのテンプレートに従って作成する。
-4. `test/<ruleId>.test.ts` を追加（または共通ゴールデンが拾う）。
-5. `npm run check`（typecheck + test + build）が緑になることを確認。
+1. `src/rules/<ruleId>.ts` に実装し、`src/index.ts` の `createRules` から返す。
+2. `manifest.json` の `rules[]` に同じ `ruleId` のメタ（`docs` 正負例・出典を含む）を追加する。
+   `rulesetPrefix` を宣言している場合、`ruleId` はその接頭辞で始めること。
+3. `docs/rules/<ruleId>.md` を [docs/rules/sample-fw-exclaim.md](./rules/sample-fw-exclaim.md) のテンプレートに
+   従って作成する（**ルールごとに1ファイル**）。
+4. `test/<ruleId>.test.ts` を追加（共通ゴールデンは `manifest.json` の例を自動検証する）。
+5. `npm run check`（typecheck + test + build）が緑になることを確認する。
 
-## テンプレート
+## 規約
 
-ルールごとに [sample-fw-exclaim.md](./sample-fw-exclaim.md) を写経して使う。
+- `docs/rules/` のファイル名は `ruleId` と一致させる（例 `sample-fw-exclaim` → `docs/rules/sample-fw-exclaim.md`）。
+- `docs/rules/<ruleId>.md` の正例・誤例は `manifest.json` の `docs` と一致させ、テストと同期させる。
