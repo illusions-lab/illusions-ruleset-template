@@ -122,3 +122,13 @@ GitHub のリポジトリに **`illusions-ruleset`** という topic（トピッ
 
 `manifest.json` の `engineApi` は illusions 側の `ENGINE_API_VERSION`（現在 **1**）と一致させること。
 一致しないルールセットは隔離され、警告とともに読み込まれない。
+
+
+<div align="right">
+  <a href="https://www.art.nihon-u.ac.jp/education/department/literature/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/illusions-lab/.github/refs/heads/main/images/NUArt_colored.svg">
+      <img src="https://raw.githubusercontent.com/illusions-lab/.github/refs/heads/main/images/NUArt.svg" height="64" alt="日本大学芸術学部">
+    </picture>
+  </a>
+</div>
